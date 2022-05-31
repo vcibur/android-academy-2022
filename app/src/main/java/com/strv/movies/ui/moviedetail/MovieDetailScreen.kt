@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -151,12 +153,21 @@ fun MovieInfo(movie: MovieDetail) {
 
 @Composable
 fun GenresList(genres: List<Genre>) {
-    LazyRow {
+    LazyRow(
+        modifier = Modifier.padding(end = 16.dp)
+    )
+    {
         itemsIndexed(items = genres) { _, item ->
-            Text(
-                text = item.name,
-                modifier = Modifier.padding(16.dp)
+            Button(
+                onClick = {},
+                modifier = Modifier.padding(top = 16.dp, start = 16.dp),
+                shape = RoundedCornerShape(50)
             )
+            {
+                Text(
+                    text = item.name
+                )
+            }
         }
     }
 }
