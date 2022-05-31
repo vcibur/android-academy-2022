@@ -7,8 +7,10 @@ import com.strv.movies.data.mapper.MovieMapper
 import com.strv.movies.database.MoviesDatabase
 import com.strv.movies.extension.Either
 import com.strv.movies.model.Movie
+import com.strv.movies.model.MovieDTO
 import com.strv.movies.model.MovieDetail
 import com.strv.movies.model.MovieDetailDTO
+import com.strv.movies.model.PopularMoviesDTO
 import com.strv.movies.model.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -36,6 +38,7 @@ class MovieRepository @Inject constructor(
     suspend fun getPopularMovies(): Either<String, List<Movie>> {
         return try {
             val popularMovies = api.getPopularMovies()
+            storePopularMovies(popularMovies)
             Either.Value(popularMovies.results.map { movieMapper.map(it) })
         } catch (exception: Throwable) {
             Either.Error(exception.localizedMessage ?: "Network error")
@@ -52,6 +55,12 @@ class MovieRepository @Inject constructor(
             moviesDao.insertMovieDetail(movie.toEntity())
             moviesDao.insertGenres(movie.genres.map { it.toEntity() })
             moviesDao.insertMovieGenres(movie.genres.map { it.toEntity(movie.id) })
+        }
+    }
+
+    private suspend fun storePopularMovies(movies: PopularMoviesDTO) {
+        moviesDatabase.withTransaction {
+            moviesDao.insertPopularMovies(movies.map { it.toEntity() })
         }
     }
 }

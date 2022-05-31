@@ -8,6 +8,7 @@ import com.strv.movies.data.entity.GenreEntity
 import com.strv.movies.data.entity.MovieDetailEntity
 import com.strv.movies.data.entity.MovieGenreEntity
 import com.strv.movies.data.entity.MovieDetailWithGenres
+import com.strv.movies.data.entity.MoviesListEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -24,4 +25,7 @@ interface MoviesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovieGenres(enities: List<MovieGenreEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertPopularMovies(enities: List<MoviesListEntity>)
 }
