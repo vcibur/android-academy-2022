@@ -40,7 +40,7 @@ class MoviesListViewModel @Inject constructor(
                 Log.e("TAG", "MovieListSuccess: ${movieList.size}")
                 _viewState.update {
                     MoviesListViewState(
-                        movies = movieList
+                        movies = movieList.sortedByDescending { movie -> movie.popularity }
                     )
                 }
             }
