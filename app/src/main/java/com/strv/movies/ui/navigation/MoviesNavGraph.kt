@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.strv.movies.ui.login.LoginScreen
 import com.strv.movies.ui.moviedetail.MovieDetailScreen
 import com.strv.movies.ui.movieslist.MoviesListScreen
 
@@ -17,8 +18,12 @@ fun MoviesNavGraph(
 ) {
     NavHost(
         navController = navController,
-        startDestination = MoviesDestinations.MOVIES_LIST_ROUTE
+        startDestination = MoviesDestinations.LOGIN_ROUTE
     ) {
+        composable(MoviesDestinations.LOGIN_ROUTE) {
+            LoginScreen()
+        }
+        
         composable(MoviesDestinations.MOVIES_LIST_ROUTE) {
             MoviesListScreen(
                 navigateToMovieDetail = { movieId ->
