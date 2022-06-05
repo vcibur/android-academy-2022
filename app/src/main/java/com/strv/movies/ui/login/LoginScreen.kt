@@ -8,8 +8,13 @@ import com.strv.movies.ui.moviedetail.MovieDetailViewModel
 
 @Composable
 fun LoginScreen(
+    navigateToMoviesList: () -> Unit,
 ) {
-    Button(onClick = { }) {
+    Button(
+        onClick = {
+            navigateToMoviesList()
+        }
+    ) {
         Text(text = "Sign Up")
     }
 }

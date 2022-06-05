@@ -21,7 +21,11 @@ fun MoviesNavGraph(
         startDestination = MoviesDestinations.LOGIN_ROUTE
     ) {
         composable(MoviesDestinations.LOGIN_ROUTE) {
-            LoginScreen()
+            LoginScreen(
+                navigateToMoviesList = {
+                    navController.navigate(MoviesDestinations.MOVIES_LIST_ROUTE)
+                }
+            )
         }
         
         composable(MoviesDestinations.MOVIES_LIST_ROUTE) {
