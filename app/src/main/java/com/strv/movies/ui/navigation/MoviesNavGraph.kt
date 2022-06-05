@@ -24,10 +24,11 @@ fun MoviesNavGraph(
             LoginScreen(
                 navigateToMoviesList = {
                     navController.navigate(MoviesDestinations.MOVIES_LIST_ROUTE)
-                }
+                },
+                viewModel = hiltViewModel(),
             )
         }
-        
+
         composable(MoviesDestinations.MOVIES_LIST_ROUTE) {
             MoviesListScreen(
                 navigateToMovieDetail = { movieId ->
