@@ -59,6 +59,7 @@ class MainActivity : ComponentActivity() {
                             },
                             backgroundColor = MaterialTheme.colors.primary,
                             actions = {
+                                BackButton()
                                 DarkLightModeSwitchIcon(
                                     isDarkTheme = isDarkTheme,
                                     changeTheme = viewModel::changeTheme
@@ -70,6 +71,24 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    @Composable
+    private fun BackButton() {
+        Icon(
+            modifier = Modifier
+                .padding(end = 20.dp)
+                .clickable(
+                    interactionSource = remember {
+                        MutableInteractionSource()
+                    },
+                    indication = rememberRipple(bounded = false),
+                ) {
+
+                },
+            painter = painterResource(R.drawable.ic_back),
+            contentDescription = null,
+        )
     }
 
     @Composable
